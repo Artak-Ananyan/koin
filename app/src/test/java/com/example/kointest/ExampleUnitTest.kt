@@ -25,25 +25,26 @@ import org.koin.test.mock.MockProviderRule
  * See [testing documentation](http://d.android.com/tools/testing).
  */
 
-class ExampleUnitTest : KoinTest{
+class ExampleUnitTest : KoinTest, Application(){
 
-    val componentB : Student by inject ()
+    val binSDK : BinSDK by inject ()
 
     @get:Rule
     val koinTestRule = KoinTestRule.create{
         modules(testModule)
+        androidContext(this@ExampleUnitTest)
     }
 
     @get:Rule
     val mockProvider = MockProviderRule.create { clazz ->
-        TestStudent()
+        ClassReturnString()
     }
     @Test
     fun addition_isCorrect() {
 
 
-        Log.d("I am studyingggggg",  componentB.beSmart())
+        Log.d("Test",  binSDK.sdkReturn)
 
-        assertEquals("I am studyingggggg", componentB.beSmart())
+        assertEquals("Testin", binSDK.sdkReturn)
     }
 }

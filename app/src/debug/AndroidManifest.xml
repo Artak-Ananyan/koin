@@ -5,6 +5,6 @@
   <application>
     <activity
         android:theme="@style/Theme.KoinTest"
-      android:name=".MockTestRunner"/>
+      android:name=".MainActivity"/>
   </application>
 </manifest>
