@@ -1,8 +1,8 @@
 package com.example.kointest
 
-class ClassReturnString {
+class ClassReturnString  {
 
-    fun getMyString(): String{
+     fun getMyString(): String{
         return "Test"
     }
 }

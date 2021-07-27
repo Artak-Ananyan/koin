@@ -1,15 +1,11 @@
-package com.example.kointest
+package com.example.kointest.lol
 
 import android.app.Application
-import android.os.Bundle
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import androidx.test.filters.LargeTest
 import androidx.test.internal.runner.junit4.AndroidJUnit4ClassRunner
-import androidx.test.platform.app.InstrumentationRegistry
-import androidx.test.rule.ActivityTestRule
-import com.android.dx.command.Main
+import com.example.kointest.BinSDK
+import com.example.kointest.appModule
 import org.junit.Assert
-import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -19,24 +15,24 @@ import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 import org.koin.dsl.koinApplication
 import org.koin.test.KoinTest
-import org.koin.test.inject
 
 
-@RunWith(AndroidJUnit4ClassRunner::class)
-class ExampleInstrumentedTest : Application() {
+@RunWith(AndroidJUnit4::class)
+class ExampleInstrumentedTest : Application(), KoinTest {
+    @get:Rule
     val binSDK : BinSDK by inject ()
 
-
-    @get:Rule
-    var activityTestRule = ActivityTestRule(MainActivity::class.java)
     @Before
     fun setup(){
-
+        startKoin {
+            androidContext(this@ExampleInstrumentedTest)
+            modules(listOf(testModule))
+        }
     }
 
     @Test
     fun testing(){
-        assertEquals("lol", binSDK.sdkReturn)
+        Assert.assertEquals("Testin", binSDK.sdkReturn)
     }
 
 }
